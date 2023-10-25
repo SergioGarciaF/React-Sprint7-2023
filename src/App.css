@@ -1,0 +1,22 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+body{
+  background-color: black;
+  min-height: 100vh;
+}
+
+.star-wars-logo {
+  width: 13rem;
+  margin-top: -60px;
+}
+
+.buttons-landing{
+  margin-top: -30px;
+}
+
+
