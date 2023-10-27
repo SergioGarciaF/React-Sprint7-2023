@@ -1,33 +1,41 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react";
+import { Link } from 'react-router-dom';
 
-
-const StarshipsList = () => {
-    //useState para meter en array listado de starships
-    const [starships, setStarships] = useState([]);
-
-    useEffect(() => {
-        fetch("https://swapi.dev/api/starships/")
-            .then((response) => response.json())
-            .then((data) => setStarships(data.results))
-    }, [])
-    return (
-        <>
-            <ul>
-                {starships.map((el, index) => {
-                    return (
-                        <li key={index}>
-                            <div className="card w-96 bg-success text-base-100 mx-auto mt-2">
-                                <div className="card-body items-start px-1 py-1 mx-2">
-                                    <h2 className="card-title text-start">{el.name}</h2>
-                                    <p className="">{el.model}</p>
-                                </div>
-                            </div>
-                        </li>
-                    );
-                })}
-            </ul>
-        </>
-    )
+interface Starship {
+  name: string;
+  model: string;
 }
 
-export default StarshipsList
+const StarshipsList: React.FC = () => {
+  const [starships, setStarships] = useState<Starship[]>([]);
+
+  useEffect(() => {
+    fetch("https://swapi.dev/api/starships/")
+      .then((response) => response.json())
+      .then((data) => setStarships(data.results));
+  }, []);
+
+  return (
+    <>
+      <div className="mt-20">
+        <h1 className="text-accent">STARSHIPS</h1>
+      </div>
+      <ul>
+        {starships.map((el, index) => (
+          <li key={index}>
+            <Link to={`/starships/${el.name}`}>
+              <div className="card w-96 bg-success text-neutral-content mt-2">
+                <div className="card-body items-center text-center">
+                  <h2 className="text-accent">{el.name}</h2>
+                  <p className="text-accent">{el.model}</p>
+                </div>
+              </div>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+export default StarshipsList;
