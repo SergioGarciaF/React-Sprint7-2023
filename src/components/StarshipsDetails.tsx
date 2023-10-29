@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, fetchStarshipsDetails } from "../store/slices";
 
 interface Starship {
   name: string;
@@ -14,23 +16,15 @@ interface Starship {
 
 const StarshipsDetails: React.FC = () => {
   const { name } = useParams<{ name: string }>();
-  const [starship, setStarship] = useState<Starship | null>(null);
+  const dispatch = useDispatch();
+  const starship = useSelector((state: RootState) => state.starships.list.find(starship => starship.name === name));
 
   useEffect(() => {
-    fetch("https://swapi.dev/api/starships/")
-      .then((response) => response.json())
-      .then((data) => {
-        const foundStarship = data.results.find((el: Starship) => el.name === name);
-        if (foundStarship) {
-          fetch(foundStarship.url)
-            .then((response) => response.json())
-            .then((data) => setStarship(data));
-        }
-      });
-  }, [name]);
+    dispatch(fetchStarshipsDetails());
+  }, [dispatch]);
 
   if (starship) {
-    const id = starship.url.split("/").slice(-2, -1)[0]; // Extrae el ID de la URL
+    const id = starship.url.split("/").slice(-2, -1)[0];
     const imageUrl = `https://starwars-visualguide.com/assets/img/starships/${id}.jpg`;
 
     return (
