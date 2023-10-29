@@ -16,7 +16,7 @@ const Home = () => {
         <button className="tab tab-bordered text-base-100"><Link to="/starships">STARSHIPS</Link></button>
       </div>
       <div className="text-base-100">Home</div>
-    </div>
+    </div> 
   )
 } 
 

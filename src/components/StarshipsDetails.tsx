@@ -12,7 +12,7 @@ interface Starship {
   manufacturer: string;
   length: string;
   crew: string; 
-}
+} 
 
 const StarshipsDetails: React.FC = () => {
   const { name } = useParams<{ name: string }>();

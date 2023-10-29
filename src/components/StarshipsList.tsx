@@ -16,7 +16,7 @@ const StarshipsList: React.FC = () => {
   const fetchMoreStarships = () => {
     if (next) {
       dispatch(fetchStarships());
-    } 
+    }  
   }
 
   return (
