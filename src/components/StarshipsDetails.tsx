@@ -11,7 +11,7 @@ interface Starship {
   max_atmosphering_speed: string;
   manufacturer: string;
   length: string;
-  crew: string;
+  crew: string; 
 }
 
 const StarshipsDetails: React.FC = () => {

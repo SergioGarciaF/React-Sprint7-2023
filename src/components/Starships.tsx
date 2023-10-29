@@ -19,6 +19,6 @@ const Starships = () => {
       <StarshipsList/>
     </div>
   )
-}
+} 
 
 export default Starships

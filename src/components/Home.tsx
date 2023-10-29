@@ -18,6 +18,6 @@ const Home = () => {
       <div className="text-base-100">Home</div>
     </div>
   )
-}
+} 
 
 export default Home
