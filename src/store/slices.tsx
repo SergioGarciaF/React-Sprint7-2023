@@ -8,10 +8,12 @@ export interface Starship {
 
 export interface StarshipsState {
     list: Starship[];
+    next: string | null;
 }
 
 const initialState: StarshipsState = {
-    list: []
+    list: [],
+    next: 'https://swapi.dev/api/starships/'
 };
 
 const starshipsSlice = createSlice({
@@ -21,26 +23,31 @@ const starshipsSlice = createSlice({
         setStarships: (state, action: PayloadAction<Starship[]>) => {
             state.list = action.payload;
         },
+        setNext: (state, action: PayloadAction<string | null>) => {
+            state.next = action.payload;
+        },
         setStarshipsDetails: (state, action: PayloadAction<Starship[]>) => {
             state.list = action.payload;
         }
+        
     }
 });
 
-export const { setStarships } = starshipsSlice.actions;
+export const { setStarships, setNext } = starshipsSlice.actions;
 export const { setStarshipsDetails } = starshipsSlice.actions
 
 export default starshipsSlice.reducer;
 
-export const fetchStarships = (url = 'https://swapi.dev/api/starships/') => async (dispatch: Function, getState: Function) => {
-    const response = await axios.get(url);
-    const currentStarships = getState().starships.list;
-    const newStarships = currentStarships.concat(response.data.results);
+export const fetchStarships = () => async (dispatch: Function, getState: Function) => {
+    const { next } = getState().starships;
 
-    dispatch(setStarships(newStarships));
+    if (next) {
+        const response = await axios.get(next);
+        const currentStarships = getState().starships.list;
+        const newStarships = currentStarships.concat(response.data.results);
 
-    if (response.data.next) {
-        dispatch(fetchStarships(response.data.next));
+        dispatch(setStarships(newStarships));
+        dispatch(setNext(response.data.next));
     }
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+
 import { Link } from 'react-router-dom';
 
 // Redux
@@ -9,32 +9,21 @@ import { useDispatch, useSelector } from 'react-redux';
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const StarshipsList: React.FC = () => {
-  {/**Starship List */ }
-  const { list: starships } = useSelector((state: RootState) => state.starships);
-  {/**Dispatch */ }
+  const { list: starships, next } = useSelector((state: RootState) => state.starships);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchStarships());
-  }, [dispatch]);
 
   const fetchMoreStarships = () => {
-    dispatch(fetchStarships());
+    if (next) {
+      dispatch(fetchStarships());
+    }
   }
 
-
   return (
-    <>
-      <div className="mt-20">
-        <h1 className="text-accent">STARSHIPS</h1>
-      </div>
-      <InfiniteScroll dataLength={starships.length}
+    <InfiniteScroll dataLength={starships.length}
         next={fetchMoreStarships}
-        hasMore={true}
-        loader={<>
-          <h4 className="text-accent">Cargando...</h4>
-          <span className="loading loading-ring loading-lg text-accent"></span>
-        </>}>
+        hasMore={!!next}
+        loader={<span className="loading loading-ring loading-lg text-accent"></span>}>
         <ul>
           {starships.map((el: Starship, index: number) => (
             <li key={index}>
@@ -50,7 +39,6 @@ const StarshipsList: React.FC = () => {
           ))}
         </ul>
       </InfiniteScroll>
-    </>
   );
 }
 
