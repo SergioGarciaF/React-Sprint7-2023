@@ -2,25 +2,30 @@
 import { Link } from 'react-router-dom';
 
 // Redux
-import { fetchStarships, RootState, setStarships, Starship } from '../store/slices';
+import { fetchStarships, RootState, Starship } from '../store/slices';
 import { useDispatch, useSelector } from 'react-redux';
 
 //Infinite Scroll
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useEffect } from 'react';
 
 const StarshipsList: React.FC = () => {
   const { list: starships, next } = useSelector((state: RootState) => state.starships);
   const dispatch = useDispatch();
 
+  
+  
+
 
   const fetchMoreStarships = () => {
     if (next) {
       dispatch(fetchStarships());
-    }  
+    }
   }
 
-  return (
-    <InfiniteScroll dataLength={starships.length}
+  return ( 
+
+      <InfiniteScroll dataLength={starships.length}
         next={fetchMoreStarships}
         hasMore={!!next}
         loader={<span className="loading loading-ring loading-lg text-accent"></span>}>

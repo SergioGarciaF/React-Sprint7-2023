@@ -3,6 +3,7 @@ import Home from '../components/Home'
 import Starships from '../components/Starships'
 import StarshipsDetails from '../components/StarshipsDetails'
 
+
 const MyRouter = () => {
     return (
         <BrowserRouter>

@@ -51,7 +51,7 @@ export const fetchStarships = () => async (dispatch: Function, getState: Functio
     }
 };
 
-export const fetchStarshipsDetails = () => (dispatch: Function) => {
+export const fetchStarshipsDetails = (name: string) => (dispatch: Function) => {
     axios.get("https://swapi.dev/api/starships/")
         .then((response) => {
             const foundStarship = response.data.results.find((el: Starship) => el.name === name);
