@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'roboto': ['Roboto', 'sans-serif']
+      }
+    },
   },
   plugins: [require("daisyui")],
   daisyui: {
@@ -15,7 +19,7 @@ export default {
 
           "primary": "#f5f5f4",
 
-          "secondary": "#f5f5f4",
+          "secondary": "#FADE4B",
 
           "accent": "#f5f5f4",
 
