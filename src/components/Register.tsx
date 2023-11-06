@@ -3,11 +3,14 @@ import { setUser } from "../store/slices";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 
 
 const Register = () => {
 
     const dispatch = useDispatch();
+
+    const navigate = useNavigate();
 
     const initialState = {
         email: '',
@@ -26,6 +29,7 @@ const Register = () => {
             console.log(response.data);
             dispatch(setUser(formData))
             alert('Registrado correctamente')
+            navigate('/home')
             setFormData(initialState);
         } catch (error) {
             alert('Email ya registrado, intenta con otro email')

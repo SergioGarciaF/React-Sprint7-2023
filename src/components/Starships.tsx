@@ -1,6 +1,8 @@
 
+import { useSelector } from "react-redux";
 import Header from "./Header"
 import StarshipsList from "./StarshipsList"
+import { Navigate } from "react-router-dom";
 
 
 const Starships = () => {

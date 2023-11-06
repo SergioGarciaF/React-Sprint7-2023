@@ -4,9 +4,12 @@ import axios from 'axios'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../store/slices'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 
 const Login = () => {
+
+  const navigate = useNavigate();
 
   const initialState = {
     email: '',
@@ -26,6 +29,7 @@ const Login = () => {
       console.log(response.data);
       dispatch(setUser(response.data.user))
       alert(`¡Bienvenido!`)
+      navigate('/home')
       setFormData(initialState)
     } catch (error) {
       console.error(error);
