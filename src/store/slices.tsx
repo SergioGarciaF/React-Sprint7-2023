@@ -16,6 +16,8 @@ const initialState: StarshipsState = {
     next: 'https://swapi.dev/api/starships/'
 };
 
+//Starships
+
 const starshipsSlice = createSlice({
     name: 'starships',
     initialState,
@@ -33,10 +35,6 @@ const starshipsSlice = createSlice({
     }
 });
 
-export const { setStarships, setNext } = starshipsSlice.actions;
-export const { setStarshipsDetails } = starshipsSlice.actions
-
-export default starshipsSlice.reducer;
 
 export const fetchStarships = () => async (dispatch: Function, getState: Function) => {
     const { next } = getState().starships;
@@ -63,3 +61,40 @@ export const fetchStarshipsDetails = (name: string) => (dispatch: Function) => {
             }
         });
 };
+
+//Register and login
+
+export interface User {
+    email: string;
+    username: string;
+    password: string;
+}
+
+const initialStateUser: User = {
+    email: '',
+    username: '',
+    password: ''
+};
+
+const userSlice = createSlice({
+    name: 'user',
+    initialState: initialStateUser, 
+    reducers: {
+        setUser: (state, action: PayloadAction<User>) => {
+            return action.payload;
+        },
+    }
+});
+
+
+
+//imports
+export const { setStarships, setNext } = starshipsSlice.actions;
+export const { setStarshipsDetails } = starshipsSlice.actions
+export const { setUser} = userSlice.actions;
+
+export const starshipsReducer = starshipsSlice.reducer;
+export const userReducer = userSlice.reducer;
+
+
+

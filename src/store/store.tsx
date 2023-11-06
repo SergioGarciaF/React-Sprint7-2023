@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 // reducers
-import starships from './slices'
+import { starshipsReducer, userReducer } from "./slices";
 
-export default configureStore ({
-    reducer:{
-        starships 
+export default configureStore({
+    reducer: {
+        starships: starshipsReducer,
+        user: userReducer,
     }
 })
